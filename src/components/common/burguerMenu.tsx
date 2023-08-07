@@ -86,12 +86,6 @@ export default function BurguerMenu() {
                   </Link>
                 </>
               )}
-              <Link
-                href={"/contact"}
-                className="border-b border-indigo-400 my-8 uppercase font-Roboto text-indigo-600"
-              >
-                Contacto
-              </Link>
 
               {token ? (
                 <button
@@ -134,10 +128,6 @@ export default function BurguerMenu() {
               </Link>
             </>
           )}
-
-          <Link href={"/contact"} className="font-Roboto text-indigo-600">
-            Contacto
-          </Link>
 
           {token ? (
             <button onClick={logout} className="font-Roboto text-indigo-600">
