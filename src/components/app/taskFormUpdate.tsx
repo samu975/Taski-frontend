@@ -22,7 +22,7 @@ async function getCategory() {
   };
   const categories = await axios
     .post(
-      "http://localhost:3000/graphql",
+      `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
       {
         query: `
       query Query {
@@ -94,7 +94,7 @@ const TaskFormUpdate = () => {
       event?.preventDefault();
       axios
         .post(
-          "http://localhost:3000/graphql",
+          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
           {
             query: `
           mutation Mutation($updateTaskInput: UpdateTaskInput!) {

@@ -24,7 +24,7 @@ export default function LoginForm() {
     onSubmit: (values) => {
       event.preventDefault();
       axios
-        .post("http://localhost:3000/graphql", {
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/graphql`, {
           query: `
             mutation Mutation($loginInput: LoginInput!) {
               login(loginInput: $loginInput) {

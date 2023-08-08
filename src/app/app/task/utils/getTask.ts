@@ -10,7 +10,7 @@ const config = {
 export const getTasks = async () => {
   const tasks = await axios
     .post(
-      "http://localhost:3000/graphql",
+      `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
       {
         query: `
         query Query {

@@ -30,7 +30,7 @@ const CategoryForm = () => {
       event?.preventDefault();
       axios
         .post(
-          "http://localhost:3000/graphql",
+          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
           {
             query: `
         mutation Mutation($createCategoryInput: CreateCategoryInput!) {

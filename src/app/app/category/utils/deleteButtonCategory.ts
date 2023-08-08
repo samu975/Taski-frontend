@@ -11,7 +11,7 @@ const config = {
 export const deleteCategoryButtonHandler = async (id: string) => {
   const tasks = await axios
     .post(
-      "http://localhost:3000/graphql",
+      `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
       {
         query: `
         mutation UpdateTask($removeCategoryId: ID!) {

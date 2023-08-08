@@ -21,7 +21,7 @@ const page = () => {
     async function getCategory() {
       try {
         const response = await axios.post(
-          "http://localhost:3000/graphql",
+          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
           {
             query: `
             query Query($categoryId: ID!) {
