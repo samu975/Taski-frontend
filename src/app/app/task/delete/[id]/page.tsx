@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { deleteButtonHandler } from "../../utils";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Task } from "@/components/inteface/Task.interface";
 
 const Page = () => {
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState({} as Task);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const id = window.location.pathname.split("/")[4];

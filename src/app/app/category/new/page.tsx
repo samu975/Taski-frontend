@@ -1,6 +1,6 @@
 import CategoryForm from "@/components/app/categoryForm";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="flex justify-center w-full">
       <CategoryForm />
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

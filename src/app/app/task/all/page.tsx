@@ -3,10 +3,17 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getTasks } from "../utils/getTask";
 import { getCategoryColors } from "../utils/getCategoryColors";
+import { Task } from "@/components/inteface/Task.interface";
 const AllTask = () => {
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  let user: any = window.localStorage.getItem("user");
+
+  if (user !== null) {
+    user = JSON.parse(user);
+  } else {
+    null;
+  }
 
   function getStatus(status: String) {
     switch (status) {
@@ -56,7 +63,7 @@ const AllTask = () => {
         </p>
         {tasks.length > 0 ? (
           <>
-            {tasks.map((task, index) => {
+            {tasks.map((task: Task, index) => {
               const date = new Date(task.expiredAt);
               return (
                 <div

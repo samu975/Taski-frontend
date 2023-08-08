@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { findOneTask } from "@/app/app/task/utils/findOneTask";
+import { Category } from "../inteface/Category.interface";
 const validationSchema = yup.object({
   title: yup
     .string()
@@ -222,7 +223,7 @@ const TaskFormUpdate = () => {
           value={formik.values.categoryID}
         >
           <option value="">Seleccione una categoría</option>
-          {categories.map((category) => (
+          {categories.map((category: Category) => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>

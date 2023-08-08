@@ -3,10 +3,17 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getTasks } from "../utils/getTask";
 import { getCategoryColors } from "../utils/getCategoryColors";
+import { Task } from "@/components/inteface/Task.interface";
 const FinishedTasks = () => {
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  let user: any = window.localStorage.getItem("user");
+
+  if (user === null) {
+    user = JSON.parse(user);
+  } else {
+    return null;
+  }
 
   function getStatus(status: String) {
     switch (status) {
@@ -38,7 +45,7 @@ const FinishedTasks = () => {
     async function getTasksAsync() {
       await getTasks().then((response) => {
         const taskFiltrer = response.filter(
-          (task) => task.status === "FINISHED"
+          (task: Task) => task.status === "FINISHED"
         );
         setTasks(taskFiltrer);
       });
@@ -59,7 +66,7 @@ const FinishedTasks = () => {
         </p>
         {tasks.length > 0 ? (
           <>
-            {tasks.map((task, index) => {
+            {tasks.map((task: Task, index) => {
               const date = new Date(task.expiredAt);
               return (
                 <div

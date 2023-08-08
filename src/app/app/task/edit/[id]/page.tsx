@@ -1,7 +1,7 @@
 import TaskFormUpdate from "@/components/app/taskFormUpdate";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <div className="flex justify-center w-full">
@@ -11,4 +11,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

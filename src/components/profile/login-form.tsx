@@ -22,7 +22,9 @@ export default function LoginForm() {
     initialValues: { email: "", password: "" },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      event.preventDefault();
+      if (event?.cancelable) {
+        event.preventDefault();
+      }
       axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/graphql`, {
           query: `

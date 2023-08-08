@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Category } from "../inteface/Category.interface";
 
 async function getCategory() {
   const token = localStorage.getItem("token");
@@ -94,7 +95,7 @@ const CategoryMenu = () => {
       </button>
       {menuVisible && (
         <div className="absolute bot-full left-0 bg-white border border-gray-300 shadow-md w-full md:w-52">
-          {categories.map((category, index) => (
+          {categories.map((category: Category, index) => (
             <div
               onClick={() => {
                 goToCategories(category.id);

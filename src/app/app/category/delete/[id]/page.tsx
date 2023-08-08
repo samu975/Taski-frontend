@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 
 import { deleteCategoryButtonHandler } from "../../utils/deleteButtonCategory";
 import { useRouter } from "next/navigation";
-import { getCategoryAndTasks } from "../../utils/getCategories";
 import axios from "axios";
+import { Category } from "@/components/inteface/Category.interface";
 
-const page = () => {
-  const [category, setcategory] = useState({});
+const Page = () => {
+  const [category, setcategory] = useState({} as Category);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const id = window.location.pathname.split("/")[4];
@@ -103,4 +103,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

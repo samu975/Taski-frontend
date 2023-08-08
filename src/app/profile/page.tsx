@@ -18,9 +18,14 @@ const validationSchema = yup.object({
     .min(6, "La contraseña debe tener al menos 6 caracteres"),
 });
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
-  const userLocalStorage = JSON.parse(localStorage.getItem("user"));
+  let userLocalStorage: any = localStorage.getItem("user");
+  if (userLocalStorage !== null) {
+    userLocalStorage = JSON.parse(userLocalStorage);
+  } else {
+    return null;
+  }
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -67,7 +72,6 @@ const page = () => {
     fetchData();
   }, [userLocalStorage.id]);
 
-  console.log(user);
   return (
     <div className="w">
       <h1>Esta es la pagina de perfil</h1>
@@ -75,4 +79,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -5,7 +5,13 @@ import { useContext, useEffect } from "react";
 export default function App() {
   const router = useRouter();
   const token = window.localStorage.getItem("token");
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  let user: any = window.localStorage.getItem("user");
+
+  if (user !== null) {
+    user = JSON.parse(user);
+  } else {
+    null;
+  }
 
   useEffect(() => {
     if (!token) {

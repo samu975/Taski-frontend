@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
+import { Category } from "../inteface/Category.interface";
 
 const validationSchema = yup.object({
   title: yup
@@ -203,7 +204,7 @@ const TaskForm = () => {
           onChange={formik.handleChange}
           value={formik.values.categoryID}
         >
-          {categories.map((category) => (
+          {categories.map((category: Category) => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
