@@ -4,16 +4,15 @@ import React, { useEffect, useState } from "react";
 import { getTasks } from "../utils/getTask";
 import { getCategoryColors } from "../utils/getCategoryColors";
 import { Task } from "@/components/inteface/Task.interface";
+import Cookies from "js-cookie";
+import cookie from "cookie";
 const FinishedTasks = () => {
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  let user: any = window.localStorage.getItem("user");
-
-  if (user === null) {
-    user = JSON.parse(user);
-  } else {
-    return null;
-  }
+  const userCookie = Cookies.get("user");
+  let user = userCookie
+    ? cookie.parse(userCookie)
+    : { id: 0, name: "", lastName: "", email: "" };
 
   function getStatus(status: String) {
     switch (status) {
@@ -57,7 +56,8 @@ const FinishedTasks = () => {
     <>
       <div className="flex items-center flex-col">
         <h1 className="font-Roboto font-bold text-xl">
-          Bienvenido <span className="text-indigo-600">{user.name}</span>
+          Bienvenido{" "}
+          <span className="text-indigo-600">{user.name ? user.name : ""}</span>
         </h1>
 
         <p className="font-roboto font-medium text-lg my-4 mx-4 px-2 text-center">
@@ -147,8 +147,6 @@ const FinishedTasks = () => {
                   </div>
                 </div>
               );
-
-              //acaba
             })}
           </>
         ) : (

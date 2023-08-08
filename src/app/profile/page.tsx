@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import cookie from "cookie";
 
 const validationSchema = yup.object({
   name: yup.string().required("El nombre es requerido"),
@@ -20,12 +22,10 @@ const validationSchema = yup.object({
 
 const Page = () => {
   const router = useRouter();
-  let userLocalStorage: any = localStorage.getItem("user");
-  if (userLocalStorage !== null) {
-    userLocalStorage = JSON.parse(userLocalStorage);
-  } else {
-    return null;
-  }
+  const userCookie = Cookies.get("user");
+  let userParsed = userCookie
+    ? cookie.parse(userCookie)
+    : { id: 0, name: "", lastName: "", email: "" };
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -35,7 +35,7 @@ const Page = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
 
   useEffect(() => {
     const config = {
@@ -57,7 +57,7 @@ const Page = () => {
             }
             `,
             variables: {
-              userId: userLocalStorage.id,
+              userId: userParsed.id,
             },
           },
           config
@@ -70,7 +70,7 @@ const Page = () => {
       }
     };
     fetchData();
-  }, [userLocalStorage.id]);
+  }, [userParsed.id]);
 
   return (
     <div className="w">

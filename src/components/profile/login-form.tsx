@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const validationSchema = yup.object({
   email: yup
@@ -49,8 +50,8 @@ export default function LoginForm() {
         .then((response) => {
           const data = response.data.data.login;
           if (data.token) {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            Cookies.set("token", data.token);
+            Cookies.set("user", JSON.stringify(data.user));
             router.push("/app");
           } else {
             formik.setFieldError("password", "Invalid credentials");

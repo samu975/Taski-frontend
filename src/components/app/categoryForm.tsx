@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const validationSchema = yup.object({
   name: yup
@@ -23,7 +24,8 @@ const CategoryForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      let token = Cookies.get("token");
+
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };

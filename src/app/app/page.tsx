@@ -1,17 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import cookie from "cookie";
 
 export default function App() {
-  const router = useRouter();
-  const token = window.localStorage.getItem("token");
-  let user: any = window.localStorage.getItem("user");
+  let token = Cookies.get("token");
 
-  if (user !== null) {
-    user = JSON.parse(user);
-  } else {
-    null;
-  }
+  const router = useRouter();
+  const userCookie = Cookies.get("user");
+  let user = userCookie
+    ? cookie.parse(userCookie)
+    : { id: 0, name: "", lastName: "", email: "" };
 
   useEffect(() => {
     if (!token) {

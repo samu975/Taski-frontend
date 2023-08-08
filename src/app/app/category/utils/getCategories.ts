@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
-
-const token = localStorage.getItem("token");
+import Cookies from "js-cookie";
+const token = Cookies.get("token");
 
 const config = {
   headers: { Authorization: `Bearer ${token}` },

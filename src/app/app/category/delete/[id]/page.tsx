@@ -6,13 +6,18 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Category } from "@/components/inteface/Category.interface";
 
+import Cookies from "js-cookie";
+
 const Page = () => {
   const [category, setcategory] = useState({} as Category);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const id = window.location.pathname.split("/")[4];
+  let id: any;
+  let token = Cookies.get("token");
+  if (typeof window !== "undefined") {
+    id = window.location.pathname.split("/")[4];
+  }
 
-  const token = localStorage.getItem("token");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };

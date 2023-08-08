@@ -4,18 +4,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { getCategoryAndTasks } from "../utils/getCategories";
 import { getCategoryColors } from "../../task/utils";
 import { Category } from "../../../../components/inteface/Category.interface";
-import { User } from "@/components/inteface/User.interface";
 import { Task } from "@/components/inteface/Task.interface";
+import Cookies from "js-cookie";
 
 const Page = () => {
   const [category, setCategory] = useState({} as Category);
   const [tasks, setTasks] = useState([]);
-  let user: any = window.localStorage.getItem("user");
-  if (user !== null) {
-    user = JSON.parse(user);
-  } else {
-    user = null;
+
+  const userCookie = Cookies.get("user");
+  let user;
+  if (typeof window !== "undefined") {
+    user = JSON.parse(userCookie as string);
   }
+
   const colorCategory = getCategoryColors(category.color).slice(3);
   const router = useRouter();
 

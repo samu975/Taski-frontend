@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { Category } from "../inteface/Category.interface";
+import Cookies from "js-cookie";
 
 const validationSchema = yup.object({
   title: yup
@@ -19,7 +20,7 @@ const validationSchema = yup.object({
 });
 
 async function getCategory() {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -69,7 +70,7 @@ const TaskForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };

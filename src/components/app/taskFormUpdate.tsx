@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { findOneTask } from "@/app/app/task/utils/findOneTask";
 import { Category } from "../inteface/Category.interface";
+import Cookies from "js-cookie";
 const validationSchema = yup.object({
   title: yup
     .string()
@@ -17,7 +18,7 @@ const validationSchema = yup.object({
     .max(100, "La descripcion debe tener menos de 100 caracteres"),
 });
 async function getCategory() {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -88,7 +89,7 @@ const TaskFormUpdate = () => {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };

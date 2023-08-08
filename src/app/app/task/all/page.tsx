@@ -4,16 +4,25 @@ import React, { useEffect, useState } from "react";
 import { getTasks } from "../utils/getTask";
 import { getCategoryColors } from "../utils/getCategoryColors";
 import { Task } from "@/components/inteface/Task.interface";
+import Cookies from "js-cookie";
+import cookie from "cookie";
 const AllTask = () => {
   const router = useRouter();
   const [tasks, setTasks] = useState([]);
-  let user: any = window.localStorage.getItem("user");
+  const userCookie = Cookies.get("user");
+  let user = userCookie
+    ? cookie.parse(userCookie)
+    : { id: 0, name: "", lastName: "", email: "" };
 
-  if (user !== null) {
-    user = JSON.parse(user);
-  } else {
-    null;
-  }
+  useEffect(() => {
+    async function getTasksAsync() {
+      await getTasks().then((response) => {
+        setTasks(response);
+      });
+    }
+
+    getTasksAsync();
+  }, []);
 
   function getStatus(status: String) {
     switch (status) {
@@ -40,15 +49,6 @@ const AllTask = () => {
         return "text-green-400";
     }
   }
-
-  useEffect(() => {
-    async function getTasksAsync() {
-      await getTasks().then((response) => {
-        setTasks(response);
-      });
-    }
-    getTasksAsync();
-  }, []);
 
   return (
     <>

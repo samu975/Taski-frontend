@@ -2,14 +2,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function BurguerMenu() {
-  const token = window.localStorage.getItem("token");
+  const token = Cookies.get("token");
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathName = usePathname();
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
+  let logout = () => {
+    Cookies.remove("token");
+    Cookies.remove("user");
     window.location.href = "/";
   };
 
