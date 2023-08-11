@@ -2,17 +2,20 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import cookie from "cookie";
 
 export default function App() {
   let token = Cookies.get("token");
 
   const router = useRouter();
-  const userCookie = Cookies.get("user");
-  let user = userCookie
-    ? cookie.parse(userCookie)
-    : { id: 0, name: "", lastName: "", email: "" };
+  const getUser = () => {
+    const userCookie = Cookies.get("user");
+    if (userCookie) {
+      return JSON.parse(userCookie);
+    }
+    return null;
+  };
 
+  const user = getUser();
   useEffect(() => {
     if (!token) {
       router.push("/");
@@ -31,7 +34,8 @@ export default function App() {
       {!token ? resNoToken : null}
       <div className="flex items-center flex-col">
         <h1 className="font-Roboto font-bold text-xl">
-          Bienvenido <span className="text-indigo-600">{user.name}</span>
+          Bienvenido{" "}
+          <span className="text-indigo-600">{user ? user.name : ""}</span>
         </h1>
         <p className="px-6 mt-6 font-Roboto font-medium text-md">
           Para visualizar tus task selecciona una opcion en el menu de{" "}

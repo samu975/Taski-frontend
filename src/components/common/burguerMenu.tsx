@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 export default function BurguerMenu() {
@@ -13,6 +13,15 @@ export default function BurguerMenu() {
     Cookies.remove("user");
     window.location.href = "/";
   };
+
+  //hidratacion
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  });
+  if (!hydrated) {
+    return null;
+  }
 
   return (
     <>
