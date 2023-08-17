@@ -44,7 +44,6 @@ const CategoryMenu = () => {
         return "bg-yellow-400";
       case "azul":
         return "bg-blue-400";
-
       case "verde":
         return "bg-green-400";
       case "violeta":
@@ -57,6 +56,8 @@ const CategoryMenu = () => {
         return "bg-cyan-400";
       case "gris":
         return "bg-gray-400";
+      case "rojo":
+        return "bg-red-400";
       default:
         return "bg-white";
     }
@@ -75,6 +76,17 @@ const CategoryMenu = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCategories(await getCategory());
+    };
+
+    if (menuVisible) {
+      fetchData();
+    }
+  }, [menuVisible]);
+
   return (
     <>
       <button
