@@ -12,16 +12,15 @@ interface TokenDecodeType {
   exp: number;
 }
 
+export const getToken = () => {
+  const token = Cookies.get("token");
+  if (token) {
+    return token;
+  }
+  return null;
+};
+
 const Page = () => {
-  const getToken = () => {
-    const token = Cookies.get("token");
-
-    if (token) {
-      return token;
-    }
-    return null;
-  };
-
   const token = getToken();
   const userID = token ? (jwt_decode(token) as TokenDecodeType).id : null;
   const router = useRouter();

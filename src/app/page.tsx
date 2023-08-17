@@ -15,18 +15,26 @@ const Landing = () => {
       </div>
 
       <div className="relative">
-        <video className="opacity-60" loop autoPlay muted>
+        <video
+          className="opacity-60"
+          loop
+          autoPlay
+          muted
+          data-testid="landing-video"
+        >
           <source src="/landing-video.mp4" />
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-gray-300 opacity-10"></div>
       </div>
-      <div>
+      <div data-testid="registration-animated">
         <h3 className=" text-center w-full font-roboto font-bold text-xl my-8 px-2">
           Regístrate ahora y descubre una forma más inteligente y sencilla de
           organizar <RegisterAnimated />
         </h3>
       </div>
-      <RegisterForm />
+      <div data-testid="registration-form">
+        <RegisterForm />
+      </div>
     </main>
   );
 };
